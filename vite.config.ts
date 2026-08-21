@@ -203,12 +203,15 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
+const plugins = isGitHubPages
+  ? [react(), tailwindcss(), jsxLocPlugin()]
+  : [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
 export default defineConfig({
   // GitHub Pages project URL: https://tagun9797.github.io/maguffin-marketing-site/
   // Local/Manus preview stays at the site root; the Action turns on the project subpath.
-  base: process.env.GITHUB_PAGES === "true" ? "/maguffin-marketing-site/" : "/",
+  base: isGitHubPages ? "/maguffin-marketing-site/" : "/",
   plugins,
   resolve: {
     alias: {
