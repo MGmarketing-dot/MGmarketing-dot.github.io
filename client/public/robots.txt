@@ -1,0 +1,6 @@
+# 웹마스터 테스트 사이트 크롤링 정책
+User-agent: *
+Allow: /
+
+# 배포 전 example.com을 실제 도메인으로 바꾸세요.
+Sitemap: https://example.com/sitemap.xml
