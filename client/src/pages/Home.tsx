@@ -86,8 +86,8 @@ export default function Home() {
           </div>
           <div className="hero-copy reveal">
             <p className="eyebrow"><span className="signal-dot" /> PERSONAL HOSTING / SEO CHECK</p>
-            <h1>검색 로봇이<br /><em>읽을 수 있는</em><br />개인 홈페이지.</h1>
-            <p className="hero-description">네이버 웹마스터 도구 테스트를 위해 만든 개인 호스팅용 정적 홈페이지입니다. 수집, 색인, 메타데이터, 문서 구조를 한 곳에서 차분하게 점검합니다.</p>
+            <h1>맥거핀 마켓팅<br /><em>고객의 시선을</em><br />잡아끄는 마케팅</h1>
+            <p className="hero-description">네이버 웹마스터 SEO 테스트를 위해 만든 마케팅 테스트 홈페이지입니다. 수집, 색인, 메타데이터, 문서 구조를 한 곳에서 차분하게 점검합니다.</p>
             <div className="hero-actions">
               <a className="ink-button" href="#guide">등록 전 구조 점검 <ChevronDown size={16} /></a>
               <button className="text-button" onClick={copyAddress}>{copied ? <><Check size={16} /> 주소 복사됨</> : <><Copy size={16} /> 페이지 주소 복사</>}</button>
