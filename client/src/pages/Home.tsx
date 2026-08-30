@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 
 
-<section className="signal-section" id="signals">
+{/* <section className="signal-section" id="signals">
           <div className="section-rail"><span>01</span><i /><span>READABLE</span></div>
           <div className="section-intro reveal">
             <p className="eyebrow">WHAT A CRAWLER CAN FIND</p>
@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
             <div className="map-line short" />
             <div className="map-node"><Network size={20} /><strong>/sitemap.xml</strong><span>Map</span></div>
           </div>
-        </section>
+        </section> */}
 
 
 const documentSections = [
@@ -120,7 +120,7 @@ export default function Home() {
           <a href="#signals" className="scroll-cue" aria-label="공개 신호 섹션으로 이동"><span>SCROLL TO READ</span><ChevronDown size={17} /></a>
         </section>
 
-        {/* <section className="signal-section" id="signals">
+        <section className="signal-section" id="signals">
           <div className="section-rail"><span>01</span><i /><span>READABLE</span></div>
           <div className="section-intro reveal">
             <p className="eyebrow">WHAT A CRAWLER CAN FIND</p>
@@ -134,7 +134,7 @@ export default function Home() {
             <div className="map-line short" />
             <div className="map-node"><Network size={20} /><strong>/sitemap.xml</strong><span>Map</span></div>
           </div>
-        </section> */}
+        </section> 
 
         <section className="document-series">
           {documentSections.map((section, index) => (
