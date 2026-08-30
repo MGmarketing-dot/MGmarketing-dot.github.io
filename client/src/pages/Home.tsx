@@ -5,6 +5,25 @@
 import { Check, ChevronDown, Copy, ExternalLink, FileText, Globe2, Menu, Network, Search, X, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
+
+
+<section className="signal-section" id="signals">
+          <div className="section-rail"><span>01</span><i /><span>READABLE</span></div>
+          <div className="section-intro reveal">
+            <p className="eyebrow">WHAT A CRAWLER CAN FIND</p>
+            <h2>작은 신호들이<br />문서의 맥락을 만듭니다.</h2>
+            <p>사이트가 검색에 노출되려면 먼저 접근 가능한 문서여야 합니다. 이 페이지에는 일반적인 개인 호스팅 환경에서 확인하기 좋은 기본 신호를 담았습니다.</p>
+          </div>
+          <div className="path-map" aria-label="홈페이지에서 sitemap과 robots 파일로 이어지는 구조">
+            <div className="map-node current"><Globe2 size={20} /><strong>/</strong><span>Home</span></div>
+            <div className="map-line" />
+            <div className="map-node"><FileText size={20} /><strong>/robots.txt</strong><span>Policy</span></div>
+            <div className="map-line short" />
+            <div className="map-node"><Network size={20} /><strong>/sitemap.xml</strong><span>Map</span></div>
+          </div>
+        </section>
+
+
 const documentSections = [
   {
     number: "01",
@@ -85,7 +104,7 @@ export default function Home() {
             <span>2026 / 08</span>
           </div>
           <div className="hero-copy reveal">
-            <p className="eyebrow"><span className="signal-dot" /> PERSONAL HOSTING / SEO CHECK</p>
+            {/* <p className="eyebrow"><span className="signal-dot" /> PERSONAL HOSTING / SEO CHECK</p> */}
             <h1>팔리는 제품은 우연이 아닌 설계입니다.<br /><strong>소비자의 행동을 분석하고,<br />고객의 선택을 이끌어냅니다.</strong></h1>
             <p className="hero-description">SEO / AEO 검색엔진 최적화 마케팅.</p>
             <div className="hero-actions">
@@ -101,7 +120,7 @@ export default function Home() {
           <a href="#signals" className="scroll-cue" aria-label="공개 신호 섹션으로 이동"><span>SCROLL TO READ</span><ChevronDown size={17} /></a>
         </section>
 
-        <section className="signal-section" id="signals">
+        {/* <section className="signal-section" id="signals">
           <div className="section-rail"><span>01</span><i /><span>READABLE</span></div>
           <div className="section-intro reveal">
             <p className="eyebrow">WHAT A CRAWLER CAN FIND</p>
@@ -115,7 +134,7 @@ export default function Home() {
             <div className="map-line short" />
             <div className="map-node"><Network size={20} /><strong>/sitemap.xml</strong><span>Map</span></div>
           </div>
-        </section>
+        </section> */}
 
         <section className="document-series">
           {documentSections.map((section, index) => (
