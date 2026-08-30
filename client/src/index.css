@@ -15,15 +15,15 @@
   --font-mono: "IBM Plex Mono", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  /* --color-border: var(--border);
-  --color-ring: var(--ring); */
+  --color-border: var(--border);
+  --color-ring: var(--ring);
 }
 
 :root {
   --background: #f7f5f6;
   --foreground: #17211e;
-  /* --border: #d8d4c9;
-  --ring: #0b8275; */
+  --border: #d8d4c9;
+  --ring: #0b8275;
 }
 
 
