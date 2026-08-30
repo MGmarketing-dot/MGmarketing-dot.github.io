@@ -16,7 +16,7 @@
   --color-ring: var(--ring);
 }
 
-:root { --background: #f7f5f6; --foreground: #17211e; --border: #d8d4c9; --ring: #0b8275; }
+:root { --background: #f7f5f6; --foreground: #17211e;}
 
 @layer base {
   * { @apply border-border outline-ring/50; }
