@@ -5,13 +5,6 @@
 import { Check, ChevronDown, Copy, ExternalLink, FileText, Globe2, Menu, Network, Search, X, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const siteChecks = [
-  { label: "문서 제목", detail: "페이지별 title을 구분해 작성", status: "ready" },
-  { label: "설명 메타태그", detail: "검색 결과용 요약 문장 포함", status: "ready" },
-  { label: "robots.txt", detail: "크롤링 정책과 사이트맵 경로 제공", status: "ready" },
-  { label: "sitemap.xml", detail: "배포 도메인으로 URL만 교체", status: "action" },
-];
-
 const documentSections = [
   {
     number: "01",
@@ -31,6 +24,13 @@ const documentSections = [
     alt: "문서 구조를 상징하는 크림색 인덱스 카드와 청록 탭",
     list: ["본문 맥락을 가진 링크 문구", "이미지별 대체 텍스트", "읽기 쉬운 정보 계층"],
   },
+];
+
+const siteChecks = [
+  { label: "문서 제목", detail: "페이지별 title을 구분해 작성", status: "ready" },
+  { label: "설명 메타태그", detail: "검색 결과용 요약 문장 포함", status: "ready" },
+  { label: "robots.txt", detail: "크롤링 정책과 사이트맵 경로 제공", status: "ready" },
+  { label: "sitemap.xml", detail: "배포 도메인으로 URL만 교체", status: "action" },
 ];
 
 export default function Home() {
@@ -86,8 +86,8 @@ export default function Home() {
           </div>
           <div className="hero-copy reveal">
             <p className="eyebrow"><span className="signal-dot" /> PERSONAL HOSTING / SEO CHECK</p>
-            <h1>맥거핀 마켓팅<br /><em>고객의 시선을</em><br />잡아끄는 마케팅</h1>
-            <p className="hero-description">네이버 웹마스터 SEO 테스트를 위해 만든 마케팅 테스트 홈페이지입니다. 수집, 색인, 메타데이터, 문서 구조를 한 곳에서 차분하게 점검합니다.</p>
+            <h1>팔리는 제품은 우연이 아닌 설계입니다.<br /><strong>소비자의 행동을 분석하고,<br />고객의 선택을 이끌어냅니다.</strong></h1>
+            <p className="hero-description">SEO / AEO 검색엔진 최적화 마케팅.</p>
             <div className="hero-actions">
               <a className="ink-button" href="#guide">등록 전 구조 점검 <ChevronDown size={16} /></a>
               <button className="text-button" onClick={copyAddress}>{copied ? <><Check size={16} /> 주소 복사됨</> : <><Copy size={16} /> 페이지 주소 복사</>}</button>
