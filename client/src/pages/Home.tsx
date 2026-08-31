@@ -98,7 +98,7 @@ export default function Home() {
 
       <main id="main-content">
         <section className="hero"id="top"
-                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
           {/* <div className="hero-rail" aria-hidden="true">
             <span>FIELD NOTE</span>
             <i />
