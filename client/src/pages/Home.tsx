@@ -97,12 +97,13 @@ export default function Home() {
       </header>
 
       <main id="main-content">
-        <section className="hero" id="top">
-          <div className="hero-rail" aria-hidden="true">
+        <section className="hero"id="top"
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>>
+          {/* <div className="hero-rail" aria-hidden="true">
             <span>FIELD NOTE</span>
             <i />
             <span>2026 / 08</span>
-          </div>
+          </div> */}
           <div className="hero-copy reveal">
             {/* <p className="eyebrow"><span className="signal-dot" /> PERSONAL HOSTING / SEO CHECK</p> */}
             <h1>팔리는 제품은 우연이 아닌 설계입니다.<br /><strong>소비자의 행동을 분석하고,<br />고객의 선택을 이끌어냅니다.</strong></h1>
@@ -112,12 +113,12 @@ export default function Home() {
               <button className="text-button" onClick={copyAddress}>{copied ? <><Check size={16} /> 주소 복사됨</> : <><Copy size={16} /> 페이지 주소 복사</>}</button>
             </div>
           </div>
-          <div className="hero-art reveal" style={{ animationDelay: "90ms" }}>
+          {/* <div className="hero-art reveal" style={{ animationDelay: "90ms" }}>
             <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663892807890/wVvMwpYCZpsGRtHr.jpg" alt="검색 색인용 문서와 크롤링 경로를 표현한 편집 이미지" />
             <div className="art-caption"><span>CRAWL PATH</span><span>01—03</span></div>
             <div className="location-label"><i /> SITE: {host}</div>
-          </div>
-          <a href="#signals" className="scroll-cue" aria-label="공개 신호 섹션으로 이동"><span>SCROLL TO READ</span><ChevronDown size={17} /></a>
+          </div> 
+          <a href="#signals" className="scroll-cue" aria-label="공개 신호 섹션으로 이동"><span>SCROLL TO READ</span><ChevronDown size={17} /></a>*/}
         </section>
 
         <section className="signal-section" id="signals">
