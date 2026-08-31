@@ -98,10 +98,7 @@ export default function Home() {
 
       <main id="main-content">
         <section className="hero"id="top"
-                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" , fontFamily: '"Pretendard", sans-serif',
-                        fontWeight: 800,
-                        letterSpacing: '-0.04em',
-                        lineHeight: 1.25,}}>
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}
           {/* <div className="hero-rail" aria-hidden="true">
             <span>FIELD NOTE</span>
             <i />
@@ -109,7 +106,10 @@ export default function Home() {
           </div> */}
           <div className="hero-copy reveal">
             {/* <p className="eyebrow"><span className="signal-dot" /> PERSONAL HOSTING / SEO CHECK</p> */}
-            <h1>팔리는 제품은 우연이 아닌 설계입니다.<br /><strong>소비자의 행동을 분석하고,<br />고객의 선택을 이끌어냅니다.</strong></h1>
+            <h1 style = {{fontFamily: '"Pretendard", sans-serif',
+                        fontWeight: 800,
+                        letterSpacing: '-0.04em',
+                        lineHeight: 1.25,}}>팔리는 제품은 우연이 아닌 설계입니다.<br /><strong>소비자의 행동을 분석하고,<br />고객의 선택을 이끌어냅니다.</strong></h1>
             <p className="hero-description">SEO / AEO 검색엔진 최적화 마케팅.</p>
             <div className="hero-actions">
               <a className="ink-button" href="#guide">등록 전 구조 점검 <ChevronDown size={16} /></a>
