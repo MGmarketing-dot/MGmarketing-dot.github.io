@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <!-- 1. 사이트 기본 정보 -->
+  <title>맥거핀 마케팅 : MACGUFFIN MARTKETING </title>
+  <subtitle>데이터 기반 검색엔진 최적화 및 웹 퍼블리싱 마케팅 솔루션</subtitle>
+  <link href="https://mgmarketing-dot.github.io/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://mgmarketing-dot.github.io/"/>
+  <updated>2026-09-02T19:00:00Z</updated>
+  <id>https://mgmarketing-dot.github.io/</id>
+  <author>
+    <name>MACGUFFIN MARTKETING</name>
+  </author>
+
+  <!-- 2. 최근 소식 또는 대표 콘텐츠 항목 -->
+  <entry>
+    <title>맥거핀 마케팅 | SEO / AEO 기반 검색엔진최적화</title>
+    <link href="https://mgmarketing-dot.github.io/"/>
+    <id>https://mgmarketing-dot.github.io/entry-1</id>
+    <updated>2026-09-02T19:00:00Z</updated>
+    <summary>웹 표준과 검색엔진 최적화 마케팅</summary>
+  </entry>
+</feed>
