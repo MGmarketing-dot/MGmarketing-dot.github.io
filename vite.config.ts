@@ -211,7 +211,7 @@ const plugins = isGitHubPages
 export default defineConfig({
   // GitHub Pages project URL: https://tagun9797.github.io/maguffin-marketing-site/
   // Local/Manus preview stays at the site root; the Action turns on the project subpath.
-  base: isGitHubPages ? "/MGmarketing-dot/" : "/",
+  base: "/",
   plugins,
   resolve: {
     alias: {
