@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <!-- 1. 사이트 기본 정보 -->
-  <title>맥거핀 마케팅 : MACGUFFIN MARTKETING </title>
+  <title>맥거핀 마케팅 : MACGUFFIN MARKETING </title>
   <subtitle>데이터 기반 검색엔진 최적화 및 웹 퍼블리싱 마케팅 솔루션</subtitle>
   <link href="https://mgmarketing-dot.github.io/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://mgmarketing-dot.github.io/"/>
