@@ -97,78 +97,32 @@ export default function Home() {
       </header>
 
       <main id="main-content">
-  {/* 
-    1. 인라인 중앙 정렬(alignItems: "center")을 제거했습니다. 
-    2. 전체 배경색과 최소 높이 등을 Tailwind 클래스로 적용했습니다. 
-  */}
-  <section 
-    className="hero min-h-screen bg-[#f4f4f2] text-[#1a1a1a] flex flex-col justify-center px-6 md:px-16" 
-    id="top"
-  >
-    
-    {/* max-w-6xl과 items-start를 주어 왼쪽 정렬 레이아웃을 만듭니다. */}
-    <div className="hero-copy reveal max-w-6xl mx-auto w-full flex flex-col items-start text-left">
-      
-      {/* 
-        [수정 포인트] 
-        기존 H1에 묶여있던 "팔리는 제품은..." 문장을 디자인 의도에 맞게
-        시선을 잡아주는 작은 서브 타이틀(<p>)로 분리했습니다. 
-      */}
-      <p className="text-base md:text-lg font-medium tracking-tight mb-5 text-gray-800">
-        팔리는 제품은 우연이 아닌 설계입니다.
-      </p>
-
-      {/* 
-        메인 헤드라인 (H1)
-        font-black(가장 두꺼운 속성)과 lg:text-[88px](거대한 크기) 적용. 
-        Pretendard 폰트 패밀리는 기존대로 유지했습니다. 
-      */}
-      <h1 
-        className="text-5xl md:text-7xl lg:text-[88px] font-black tracking-tighter leading-[1.05] mb-8 break-keep"
-        style={{ fontFamily: '"Pretendard", sans-serif' }}
-      >
-        소비자의 행동을 분석하고,<br />
-        고객의 선택을 이끌어냅니다.
-      </h1>
-
-      {/* 핵심 설명 */}
-      <p className="hero-description text-lg md:text-xl font-medium tracking-tight text-gray-600 mb-12">
-        SEO / AEO 검색엔진 최적화 마케팅.
-      </p>
-
-      {/* 
-        버튼 영역 
-        기존 클래스와 onClick(copyAddress), 아이콘 등을 유지하면서
-        왼쪽으로 나란히 배치되도록 Tailwind 스타일을 얹었습니다. 
-      */}
-      <div className="hero-actions flex items-center gap-6">
-        
-        <a 
-          className="ink-button bg-[#1a1a1a] text-white px-5 py-3 rounded-md text-sm font-medium flex items-center gap-2 hover:bg-black transition-colors" 
-          href="#guide"
-        >
-          등록 전 구조 점검 <ChevronDown size={16} />
-        </a>
-
-        <button 
-          className="text-button text-sm font-medium text-gray-700 flex items-center gap-2 hover:text-black transition-colors" 
-          onClick={copyAddress}
-        >
-          {copied ? (
-            <><Check size={16} /> 주소 복사됨</>
-          ) : (
-            <><Copy size={16} /> 페이지 주소 복사</>
-          )}
-        </button>
-
-      </div>
-    </div>
-    
-    {/* 
-    <div className="hero-art reveal" style={{ animationDelay: "90ms" }}>
-        ...기존 주석 처리된 아트 이미지 영역...
-    </div> 
-    */}
+            <section className="hero"id="top"
+                  style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
+          {/* <div className="hero-rail" aria-hidden="true">
+            <span>FIELD NOTE</span>
+            <i />
+            <span>2026 / 08</span>
+          </div> */}
+          <div className="hero-copy reveal">
+            {/* <p className="eyebrow"><span className="signal-dot" /> PERSONAL HOSTING / SEO CHECK</p> */}
+            <h1 style = {{fontFamily: '"Pretendard", sans-serif',
+                        fontWeight: 800,
+                        letterSpacing: '-0.04em',
+                        lineHeight: 1.25,}}>팔리는 제품은 우연이 아닌 설계입니다.<br /><strong>소비자의 행동을 분석하고,<br />고객의 선택을 이끌어냅니다.</strong></h1>
+            <p className="hero-description">SEO / AEO 검색엔진 최적화 마케팅.</p>
+            <div className="hero-actions">
+              <a className="ink-button" href="#guide">등록 전 구조 점검 <ChevronDown size={16} /></a>
+              <button className="text-button" onClick={copyAddress}>{copied ? <><Check size={16} /> 주소 복사됨</> : <><Copy size={16} /> 페이지 주소 복사</>}</button>
+            </div>
+          </div>
+          {/* <div className="hero-art reveal" style={{ animationDelay: "90ms" }}>
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663892807890/wVvMwpYCZpsGRtHr.jpg" alt="검색 색인용 문서와 크롤링 경로를 표현한 편집 이미지" />
+            <div className="art-caption"><span>CRAWL PATH</span><span>01—03</span></div>
+            <div className="location-label"><i /> SITE: {host}</div>
+          </div> 
+          <a href="#signals" className="scroll-cue" aria-label="공개 신호 섹션으로 이동"><span>SCROLL TO READ</span><ChevronDown size={17} /></a>*/}
+        </section>
   </section>
 
         <section className="signal-section" id="signals">
