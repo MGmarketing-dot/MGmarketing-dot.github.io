@@ -1,4 +1,4 @@
-/**
+/**홈페이지 리뉴얼 백업
  * Design reminder — Indexing Field Notes: preserve the document-led homepage
  * across every deployment URL, including GitHub Pages project subpaths.
  */
