@@ -239,7 +239,7 @@ export default function Home() {
         <section id="contact" className="py-24 px-6 bg-gradient-to-r from-blue-600 to-cyan-500 scroll-mt-16">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">팔리는 제품은 우연이 아닌 설계입니다.</h2>
-            <p className="text-blue-100 text-lg sm:text-xl mb-8"><br></p>
+            <p className="text-blue-100 text-lg sm:text-xl mb-8"><br /></p>
             <div className="flex flex-wrap justify-center gap-4">
               <button onClick={() => setInquiryOpen(true)} className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">상담 시작하기 →</button>
               <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">무료 진단</a>
