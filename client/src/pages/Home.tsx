@@ -119,7 +119,7 @@ function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void })
         {!submitted ? (
           <form onSubmit={submit} className="space-y-4">
             <label className="block text-sm font-semibold text-slate-700">이름 또는 브랜드명
-              <input required value={fields.brand} onChange={(e) => setFields({ ...fields, brand: e.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 font-normal focus:border-blue-500 focus:outline-none" placeholder="예: 맥거핀 스튜디오" />
+              <input required value={fields.brand} onChange={(e) => setFields({ ...fields, brand: e.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 font-normal focus:border-blue-500 focus:outline-none" placeholder="예: 맥거핀 마케팅" />
             </label>
             <label className="block text-sm font-semibold text-slate-700">연락받을 곳
               <input required value={fields.contact} onChange={(e) => setFields({ ...fields, contact: e.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 font-normal focus:border-blue-500 focus:outline-none" placeholder="이메일 또는 전화번호" />
@@ -128,7 +128,7 @@ function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void })
               <textarea required rows={5} value={fields.message} onChange={(e) => setFields({ ...fields, message: e.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 font-normal focus:border-blue-500 focus:outline-none resize-y" placeholder="예: 검색 유입은 있지만 상담 문의로 잘 이어지지 않습니다." />
             </label>
             <p className="text-xs leading-relaxed text-slate-400">비공개 미리보기에서는 입력한 내용이 외부로 전송되지 않습니다.</p>
-            <button type="submit" className="w-full rounded-xl bg-blue-600 px-6 py-3.5 text-white font-bold hover:bg-blue-700 transition-colors">문의 내용 정리하기 →</button>
+            <button type="submit" className="w-full rounded-xl bg-blue-600 px-6 py-3.5 text-white font-bold hover:bg-blue-700 transition-colors">문의 내용 보내기 →</button>
           </form>
         ) : (
           <div>
