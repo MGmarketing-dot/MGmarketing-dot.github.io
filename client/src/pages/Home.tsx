@@ -15,9 +15,9 @@ const serviceDetails = [
 ];
 
 const dashboardSignals = [
-  { label: "Search Intent", value: "발견", delta: "키워드", bar: 78, color: "bg-blue-500" },
-  { label: "Content Signal", value: "관심", delta: "메시지", bar: 66, color: "bg-cyan-500" },
-  { label: "Conversion Flow", value: "선택", delta: "CTA", bar: 88, color: "bg-violet-500" },
+  { label: "Search Intent", value: "발견", delta: "키워드", bar: 88, color: "bg-blue-500" },
+  { label: "Content Signal", value: "관심", delta: "메시지", bar: 75, color: "bg-orange-500" },
+  { label: "Conversion Flow", value: "선택", delta: "CTA", bar: 85, color: "bg-red-500" },
 ];
 
 const services = [
@@ -35,8 +35,8 @@ const services = [
   {
     color: "#f59e0b",
     bg: "#fffbeb",
-    title: "퍼지는 이야기",
-    description: "사람들이 멈춰 보고 기억할 콘텐츠를 기획합니다.",
+    title: "클릭 되는 콘텐츠",
+    description: "고객님의 소중한 콘텐츠가 발견되도록 최적의 키워드를 구성합니다.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -46,8 +46,8 @@ const services = [
   {
     color: "#ef4444",
     bg: "#fef2f2",
-    title: "선택되는 흐름",
-    description: "콘텐츠에서 문의까지 다음 행동을 자연스럽게 잇습니다.",
+    title: "선택되는 서비스",
+    description: "콘텐츠에서 문의까지 다음 행동을 자연스럽게 설계합니다.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4" /><path d="m15 9 6-6M17 3h4v4" />
@@ -58,7 +58,7 @@ const services = [
     color: "#6366f1",
     bg: "#eef2ff",
     title: "측정과 개선",
-    description: "실제 반응을 확인하며 메시지와 동선을 개선합니다.",
+    description: "유입 데이터를 분석하여 매출과 성과를 관리하고 개선합니다.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="10" width="4" height="10" rx="1" /><rect x="10" y="6" width="4" height="14" rx="1" /><rect x="17" y="2" width="4" height="18" rx="1" />
@@ -169,7 +169,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-8 uppercase tracking-widest">
               <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-50" /><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" /></span>
-              SEO 기반 바이럴 마케팅
+              SEO 기반 
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-black text-slate-900 leading-[1.08] mb-6" style={{ letterSpacing: "-0.055em" }}>
               소비자의 행동을 분석하고
@@ -179,7 +179,7 @@ export default function Home() {
               이끌어냅니다
             </h1>
             <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-              검색하고, 비교하고, 망설인 뒤 선택하는 고객의 여정을 읽습니다. SEO 콘텐츠부터 바이럴 메시지, 문의 전환까지 하나의 흐름으로 설계합니다.
+              소비자의 의도를 파악합니다. 고객님의 서비스를 선택할 수밖에 없도록 모든 단계를 치밀하게 배치합니다. 검색부터 문의 전환까지 하나의 흐름을 설계합니다.  
             </p>
             <button onClick={() => setInquiryOpen(true)} className="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition-colors shadow-lg shadow-blue-200">내 브랜드 흐름 진단하기 →</button>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-8 mt-12 text-sm text-slate-500">
@@ -226,11 +226,11 @@ export default function Home() {
 
         <section id="principles" className="py-24 px-6 bg-slate-50 scroll-mt-16">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="text-4xl font-black text-slate-900 mb-4">근거 → 실행 → 축적</div>
+            <div className="text-4xl font-black text-slate-900 mb-4">분석 → 실행 → 매출 전환</div>
             <p className="text-slate-600 text-xl mb-12">맥거핀 마케팅이 프로젝트를 진행하는 방식</p>
             <div className="p-8 sm:p-10 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-100">
               <div className="flex gap-2 justify-center mb-5 text-blue-500"><span>◆</span><span>◆</span><span>◆</span></div>
-              <p className="text-xl sm:text-2xl text-slate-900 font-light leading-relaxed mb-7">“그럴듯한 수치나 확인되지 않은 성공담 대신, 지금 확인할 수 있는 검색 데이터와 고객 반응을 바탕으로 다음 실행을 정합니다.”</p>
+              <p className="text-xl sm:text-2xl text-slate-900 font-light leading-relaxed mb-7">“그럴듯한 수치나 확인되지 않은 후기 대신, 확인할 수 있는 검색 데이터와 고객 반응을 바탕으로 다음 행동을 정합니다.”</p>
               <div className="flex items-center justify-center gap-3"><div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold">M</div><div className="text-left"><p className="font-bold text-slate-900">맥거핀 마케팅</p><p className="text-sm text-slate-500">Working Principles</p></div></div>
             </div>
           </div>
@@ -238,11 +238,11 @@ export default function Home() {
 
         <section id="contact" className="py-24 px-6 bg-gradient-to-r from-blue-600 to-cyan-500 scroll-mt-16">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">지금 막힌 지점부터 시작합니다.</h2>
-            <p className="text-blue-100 text-lg sm:text-xl mb-8">정리된 기획서가 없어도 괜찮습니다. 먼저 살펴볼 문제부터 명확하게 정리해 드립니다.</p>
+            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">팔리는 제품은 우연이 아닌 설계입니다.</h2>
+            <p className="text-blue-100 text-lg sm:text-xl mb-8"></p>
             <div className="flex flex-wrap justify-center gap-4">
               <button onClick={() => setInquiryOpen(true)} className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">상담 시작하기 →</button>
-              <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">서비스 다시 보기</a>
+              <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">무료 진단</a>
             </div>
           </div>
         </section>
