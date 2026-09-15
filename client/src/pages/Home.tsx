@@ -136,7 +136,10 @@ function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void })
             <h3 className="text-xl font-black text-slate-900 mb-2">문의 초안이 완성되었습니다.</h3>
             <p className="text-sm text-slate-500 leading-relaxed mb-5">현재는 외부 전송 없이 브라우저 안에서만 정리됩니다. 공개 전 실제 수신 채널을 연결할 수 있습니다.</p>
             <pre className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700 whitespace-pre-wrap font-sans mb-4">{summary}</pre>
-            <button type="button" onClick={copy} className="w-full rounded-xl bg-blue-600 px-6 py-3.5 text-white font-bold hover:bg-blue-700 transition-colors">{copied ? "복사되었습니다 ✓" : "내용 복사하기"}</button>
+            <button type="button"  onClick={() => window.open("https://open.kakao.com/o/sHRnFKNi", "_blank")}
+              className="w-full rounded-xl bg-yellow-400 px-6 py-3.5 text-slate-900 font-bold hover:bg-yellow-500 transition-colors">
+                        카카오톡으로 문의 보내기 →
+                      </button> "복사되었습니다 ✓" : "내용 복사하기"}</button>
           </div>
         )}
       </div>
@@ -194,7 +197,7 @@ export default function Home() {
               <div>
                 <p className="text-blue-600 text-sm font-bold uppercase tracking-widest mb-3">Behavior to choice</p>
                 <h2 className="text-4xl font-black text-slate-900 mb-6">노출이 아니라,<br />선택까지 이어지는 흐름</h2>
-                <p className="text-slate-600 text-lg leading-relaxed mb-8">SEO, 바이럴 콘텐츠, 랜딩페이지를 따로 보지 않습니다. 고객이 브랜드를 발견하고 신뢰하고 문의하는 과정을 하나로 연결합니다.</p>
+                <p className="text-slate-600 text-lg leading-relaxed mb-8">SEO, 고객이 브랜드를 발견하고 신뢰하고 문의하는 과정을 하나로 연결합니다.</p>
                 <div className="space-y-3">
                   {serviceDetails.map((text) => <div key={text} className="flex items-center gap-3"><div className="w-5 h-5 shrink-0 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs">✓</div><span className="text-slate-700 text-sm">{text}</span></div>)}
                 </div>
