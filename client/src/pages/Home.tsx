@@ -143,7 +143,7 @@ function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void })
 >
   카카오톡으로 문의 보내기 →
 </button>
-            </div>
+  
             </div>
   );
 }
