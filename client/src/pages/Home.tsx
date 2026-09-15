@@ -184,9 +184,10 @@ export default function Home() {
               <br />
               이끌어냅니다
             </h1>
-            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-              소비자의 의도를 파악합니다. 고객님의 서비스를 선택할 수밖에 없도록 모든 단계를 치밀하게 배치합니다. 검색부터 문의 전환까지 하나의 흐름을 설계합니다.  
-            </p>
+            <h2 className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+              네이버·구글 상위노출 | SEO 검색 엔진 최적화 |소비자의 검색 의도를 분석합니다.
+              검색 노출부터 클릭, 문의 전환까지 | 최소 비용으로 광고 효율 극대화|
+            </h2>
             <button onClick={() => setInquiryOpen(true)} className="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition-colors shadow-lg shadow-blue-200">내 브랜드 흐름 진단하기 →</button>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-8 mt-12 text-sm text-slate-500">
               {["검색 의도에서 시작", "콘텐츠와 전환 동선 연결", "확인 가능한 근거로 개선"].map((text) => <span key={text} className="flex items-center gap-1.5"><span className="text-emerald-500"><Check /></span>{text}</span>)}
@@ -199,8 +200,8 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
               <div>
                 <p className="text-blue-600 text-sm font-bold uppercase tracking-widest mb-3">Behavior to choice</p>
-                <h2 className="text-4xl font-black text-slate-900 mb-6">노출이 아니라,<br />선택까지 이어지는 흐름</h2>
-                <p className="text-slate-600 text-lg leading-relaxed mb-8">SEO, 고객이 브랜드를 발견하고 신뢰하고 문의하는 과정을 하나로 연결합니다.</p>
+                <h2 className="text-4xl font-black text-slate-900 mb-6">상위 노출부터 <br />선택까지 이어지는 흐름</h2>
+                <p className="text-slate-600 text-lg leading-relaxed mb-8">SEO, 고객이 브랜드를 발견하는 것부터 클릭, 문의하는 과정을 하나로 연결합니다.</p>
                 <div className="space-y-3">
                   {serviceDetails.map((text) => <div key={text} className="flex items-center gap-3"><div className="w-5 h-5 shrink-0 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xs">✓</div><span className="text-slate-700 text-sm">{text}</span></div>)}
                 </div>
@@ -233,10 +234,10 @@ export default function Home() {
         <section id="principles" className="py-24 px-6 bg-slate-50 scroll-mt-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="text-4xl font-black text-slate-900 mb-4">분석 → 실행 → 매출 전환</div>
-            <p className="text-slate-600 text-xl mb-12">맥거핀 마케팅이 프로젝트를 진행하는 방식</p>
+            <h2 className="text-slate-600 text-xl mb-12">맥거핀 마케팅 | 검색 엔진 최적화 전략</p>
             <div className="p-8 sm:p-10 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-100">
               <div className="flex gap-2 justify-center mb-5 text-blue-500"><span>◆</span><span>◆</span><span>◆</span></div>
-              <p className="text-xl sm:text-2xl text-slate-900 font-light leading-relaxed mb-7">“그럴듯한 수치나 확인되지 않은 후기 대신, 확인할 수 있는 검색 데이터와 고객 반응을 바탕으로 다음 행동을 정합니다.”</p>
+              <p className="text-xl sm:text-2xl text-slate-900 font-light leading-relaxed mb-7">“확인할 수 있는 검색 데이터와 소비자 의도를 바탕으로 전환을 설계합니다.”</p>
               <div className="flex items-center justify-center gap-3"><div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold">M</div><div className="text-left"><p className="font-bold text-slate-900">맥거핀 마케팅</p><p className="text-sm text-slate-500">Working Principles</p></div></div>
             </div>
           </div>
@@ -248,7 +249,7 @@ export default function Home() {
             <p className="text-blue-100 text-lg sm:text-xl mb-8"><br /></p>
             <div className="flex flex-wrap justify-center gap-4">
               <button onClick={() => setInquiryOpen(true)} className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">상담 시작하기 →</button>
-              <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">무료 진단</a>
+              <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">사이트 무료 진단</a>
             </div>
           </div>
         </section>
