@@ -136,10 +136,13 @@ function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void })
             <h3 className="text-xl font-black text-slate-900 mb-2">문의 초안이 완성되었습니다.</h3>
             <p className="text-sm text-slate-500 leading-relaxed mb-5">현재는 외부 전송 없이 브라우저 안에서만 정리됩니다. 공개 전 실제 수신 채널을 연결할 수 있습니다.</p>
             <pre className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700 whitespace-pre-wrap font-sans mb-4">{summary}</pre>
-            <button type="button"  onClick={() => window.open("https://open.kakao.com/o/sHRnFKNi", "_blank")}
-              <button type="button" onClick={() => window.open("https://open.kakao.com/o/sHRnFKNi", "_blank")}
-                          className="w-full rounded-xl bg-yellow-400 px-6 py-3.5 text-slate-900 font-bold hover:bg-yellow-500 transition-colors">
-                              카카오톡으로 문의 보내기 → </button>)}
+           <button
+  type="button"
+  onClick={() => window.open("https://open.kakao.com/o/sHRnFKNi", "_blank")}
+  className="w-full rounded-xl bg-yellow-400 px-6 py-3.5 text-slate-900 font-bold hover:bg-yellow-500 transition-colors"
+>
+  카카오톡으로 문의 보내기 →
+</button>
             </div>
             </div>
   );
