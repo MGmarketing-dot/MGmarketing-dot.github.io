@@ -267,7 +267,7 @@ function ContactPage() {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <a href="/" className="flex items-center gap-2" aria-label="맥거핀 마케팅 홈">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-sm font-black text-white">M</span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-white">M</span>
             <span className="font-black">맥거핀 마케팅</span>
           </a>
           <a href="/" className="text-sm font-semibold text-slate-500 transition-colors hover:text-slate-900">홈으로 돌아가기</a>
@@ -334,9 +334,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <nav className="border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="mx-auto h-16 max-w-none px-4 flex items-center justify-between sm:px-6">
           <a href="#top" className="flex items-center gap-2" aria-label="맥거핀 마케팅 홈">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black text-sm">M</div>
+            <div className="w-8 h-8 rounded-full bg-slate-950 flex items-center justify-center text-white font-black text-sm">M</div>
             <span className="font-black text-slate-900 text-lg">맥거핀 마케팅</span>
           </a>
           <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-600">
@@ -438,17 +438,17 @@ export default function Home() {
             <div className="p-8 sm:p-10 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-100">
               <div className="flex gap-2 justify-center mb-5 text-blue-500"><span>◆</span><span>◆</span><span>◆</span></div>
               <p className="text-xl sm:text-2xl text-slate-900 font-light leading-relaxed mb-7">“확인할 수 있는 검색 데이터와 소비자 의도를 바탕으로 전환을 설계합니다.”</p>
-              <div className="flex items-center justify-center gap-3"><div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold">M</div><div className="text-left"><p className="font-bold text-slate-900">맥거핀 마케팅</p><p className="text-sm text-slate-500">Working Principles</p></div></div>
+              <div className="flex items-center justify-center gap-3"><div className="w-12 h-12 rounded-full bg-slate-950 flex items-center justify-center text-white font-bold">M</div><div className="text-left"><p className="font-bold text-slate-900">맥거핀 마케팅</p><p className="text-sm text-slate-500">Working Principles</p></div></div>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="py-24 px-6 bg-gradient-to-r from-blue-600 to-cyan-500 scroll-mt-16">
+        <section id="contact" className="py-24 px-6 bg-orange-500 scroll-mt-16">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">팔리는 제품은 우연이 아닌 설계입니다.</h2>
-            <p className="text-blue-100 text-lg sm:text-xl mb-8"><br /></p>
+            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">SEO 검색엔진 최적화, 지금 확인하세요</h2>
+            <p className="text-orange-100 text-lg sm:text-xl mb-8"><br /></p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="/?page=contact" className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">문의하기 →</a>
+              <a href="/?page=contact" className="px-8 py-4 rounded-xl bg-white text-orange-600 font-bold text-lg hover:shadow-xl transition-shadow">문의하기 →</a>
               <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">사이트 무료 진단</a>
             </div>
           </div>
@@ -459,7 +459,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto min-h-[10rem] flex flex-col justify-between gap-14">
           <div className="flex flex-col items-start justify-between gap-12 md:flex-row">
             <a href="#top" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-sm font-black text-white">M</div>
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-sm font-black text-white">M</div>
               <span className="text-lg font-bold text-white">맥거핀 마케팅</span>
             </a>
 
