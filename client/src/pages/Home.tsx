@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent, PointerEvent } from "react";
 
 const Check = () => (
@@ -70,7 +70,75 @@ const services = [
 const keywordNodeClass =
   "absolute cursor-default select-none whitespace-nowrap px-2 py-1 text-slate-500 transition-[transform,color] duration-200 ease-out will-change-transform hover:z-30 hover:text-slate-800";
 
+const keywordConnections = [
+  ["brand", "consumer"], ["brand", "intent"], ["brand", "analysis"],
+  ["brand", "choice"], ["brand", "conversion"], ["brand", "marketing"],
+  ["brand", "funnel"], ["consumer", "beauty"], ["consumer", "traffic"],
+  ["intent", "hospital"], ["intent", "nudge"], ["analysis", "b2b"],
+  ["choice", "restaurant"], ["conversion", "organic"], ["marketing", "revenue"],
+] as const;
+
+function updateKeywordConnections(area: HTMLDivElement) {
+  const areaRect = area.getBoundingClientRect();
+  if (!areaRect.width || !areaRect.height) return;
+
+  area.querySelectorAll<SVGLineElement>("[data-keyword-line]").forEach((line) => {
+    const fromId = line.dataset.from;
+    const toId = line.dataset.to;
+    if (!fromId || !toId) return;
+
+    const from = area.querySelector<HTMLElement>(`[data-keyword-id="${fromId}"]`);
+    const to = area.querySelector<HTMLElement>(`[data-keyword-id="${toId}"]`);
+    if (!from || !to) return;
+
+    const fromRect = from.getBoundingClientRect();
+    const toRect = to.getBoundingClientRect();
+    const x1 = ((fromRect.left + fromRect.width / 2 - areaRect.left) / areaRect.width) * 100;
+    const y1 = ((fromRect.top + fromRect.height / 2 - areaRect.top) / areaRect.height) * 100;
+    const x2 = ((toRect.left + toRect.width / 2 - areaRect.left) / areaRect.width) * 100;
+    const y2 = ((toRect.top + toRect.height / 2 - areaRect.top) / areaRect.height) * 100;
+
+    line.setAttribute("x1", x1.toFixed(2));
+    line.setAttribute("y1", y1.toFixed(2));
+    line.setAttribute("x2", x2.toFixed(2));
+    line.setAttribute("y2", y2.toFixed(2));
+  });
+}
+
 function InteractiveKeywordHero() {
+  const areaRef = useRef<HTMLDivElement>(null);
+  const connectionFrameRef = useRef<number | null>(null);
+
+  const animateConnections = (area: HTMLDivElement) => {
+    if (connectionFrameRef.current !== null) cancelAnimationFrame(connectionFrameRef.current);
+    const startedAt = performance.now();
+
+    const followNodes = (now: number) => {
+      updateKeywordConnections(area);
+      if (now - startedAt < 260) {
+        connectionFrameRef.current = requestAnimationFrame(followNodes);
+      } else {
+        connectionFrameRef.current = null;
+      }
+    };
+
+    connectionFrameRef.current = requestAnimationFrame(followNodes);
+  };
+
+  useEffect(() => {
+    const area = areaRef.current;
+    if (!area) return undefined;
+
+    const update = () => updateKeywordConnections(area);
+    update();
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("resize", update);
+      if (connectionFrameRef.current !== null) cancelAnimationFrame(connectionFrameRef.current);
+    };
+  }, []);
+
   const moveKeywords = (event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "touch") return;
 
@@ -98,44 +166,55 @@ function InteractiveKeywordHero() {
         node.style.transform = "translate3d(0, 0, 0) scale(1)";
       }
     });
+    animateConnections(area);
   };
 
   const resetKeywords = (event: PointerEvent<HTMLDivElement>) => {
     event.currentTarget.querySelectorAll<HTMLElement>("[data-keyword-node]").forEach((node) => {
       node.style.transform = "translate3d(0, 0, 0) scale(1)";
     });
+    animateConnections(event.currentTarget);
   };
 
   return (
     <div
-      className="relative mx-auto h-[420px] w-full max-w-5xl overflow-hidden bg-transparent sm:h-[480px] md:h-[520px]"
+      ref={areaRef}
+      className="relative mx-auto h-[420px] w-full max-w-5xl overflow-visible bg-transparent sm:h-[480px] md:h-[520px]"
       onPointerMove={moveKeywords}
       onPointerLeave={resetKeywords}
       aria-describedby="keyword-graphic-description"
     >
+      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <g stroke="rgb(148 163 184)" strokeWidth="0.12" opacity="0.5">
+          {keywordConnections.map(([from, to]) => (
+            <line key={`${from}-${to}`} data-keyword-line data-from={from} data-to={to} />
+          ))}
+        </g>
+      </svg>
+
       <h1 aria-label="맥거핀마케팅 소비자 행동 고객 의도 분석 선택 전환 마케팅" className="absolute inset-0 m-0 text-slate-900">
-        <span data-keyword-node className={`${keywordNodeClass} left-[39%] top-[34%] z-20 text-xl font-black sm:text-3xl md:text-4xl`}>맥거핀마케팅</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[5%] top-[27%] text-xl font-black sm:left-[8%] sm:text-3xl md:text-4xl`}>소비자 행동</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[61%] top-[20%] text-lg font-bold sm:text-2xl md:text-3xl`}>고객 의도</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[16%] top-[55%] text-lg font-bold sm:left-[20%] sm:text-2xl md:text-3xl`}>분석</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[70%] top-[51%] text-xl font-black sm:text-3xl md:text-4xl`}>선택</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[51%] top-[68%] text-lg font-bold sm:text-2xl md:text-3xl`}>전환</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[27%] top-[73%] text-lg font-bold sm:text-2xl md:text-3xl`}>마케팅</span>
+        <span data-keyword-node data-keyword-id="brand" className={`${keywordNodeClass} left-[39%] top-[34%] z-20 text-xl font-black sm:text-3xl md:text-4xl`}>맥거핀마케팅</span>
+        <span data-keyword-node data-keyword-id="consumer" className={`${keywordNodeClass} left-[5%] top-[27%] text-xl font-black sm:left-[8%] sm:text-3xl md:text-4xl`}>소비자 행동</span>
+        <span data-keyword-node data-keyword-id="intent" className={`${keywordNodeClass} left-[61%] top-[20%] text-lg font-bold sm:text-2xl md:text-3xl`}>고객 의도</span>
+        <span data-keyword-node data-keyword-id="analysis" className={`${keywordNodeClass} left-[16%] top-[55%] text-lg font-bold sm:left-[20%] sm:text-2xl md:text-3xl`}>분석</span>
+        <span data-keyword-node data-keyword-id="choice" className={`${keywordNodeClass} left-[70%] top-[51%] text-xl font-black sm:text-3xl md:text-4xl`}>선택</span>
+        <span data-keyword-node data-keyword-id="conversion" className={`${keywordNodeClass} left-[51%] top-[68%] text-lg font-bold sm:text-2xl md:text-3xl`}>전환</span>
+        <span data-keyword-node data-keyword-id="marketing" className={`${keywordNodeClass} left-[27%] top-[73%] text-lg font-bold sm:text-2xl md:text-3xl`}>마케팅</span>
       </h1>
 
       <h2 aria-label="뷰티 병원 음식점 B2B 퍼널 넛지 트래픽 오가닉 매출" className="absolute inset-0 m-0 text-slate-500">
-        <span data-keyword-node className={`${keywordNodeClass} left-[3%] top-[10%] text-sm font-semibold sm:text-base`}>뷰티</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[80%] top-[10%] text-sm font-semibold sm:text-base`}>병원</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[76%] top-[78%] text-sm font-semibold sm:text-base`}>음식점</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[5%] top-[80%] text-sm font-semibold sm:text-base`}>B2B</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[46%] top-[7%] text-sm font-semibold sm:text-base`}>퍼널</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[83%] top-[43%] text-sm font-semibold sm:text-base`}>넛지</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[4%] top-[45%] text-sm font-semibold sm:text-base`}>트래픽</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[61%] top-[85%] text-sm font-semibold sm:text-base`}>오가닉</span>
-        <span data-keyword-node className={`${keywordNodeClass} left-[45%] top-[53%] text-sm font-semibold sm:text-base`}>매출</span>
+        <span data-keyword-node data-keyword-id="beauty" className={`${keywordNodeClass} left-[3%] top-[10%] text-sm font-semibold sm:text-base`}>뷰티</span>
+        <span data-keyword-node data-keyword-id="hospital" className={`${keywordNodeClass} left-[80%] top-[10%] text-sm font-semibold sm:text-base`}>병원</span>
+        <span data-keyword-node data-keyword-id="restaurant" className={`${keywordNodeClass} left-[76%] top-[78%] text-sm font-semibold sm:text-base`}>음식점</span>
+        <span data-keyword-node data-keyword-id="b2b" className={`${keywordNodeClass} left-[5%] top-[80%] text-sm font-semibold sm:text-base`}>B2B</span>
+        <span data-keyword-node data-keyword-id="funnel" className={`${keywordNodeClass} left-[46%] top-[7%] text-sm font-semibold sm:text-base`}>퍼널</span>
+        <span data-keyword-node data-keyword-id="nudge" className={`${keywordNodeClass} left-[83%] top-[43%] text-sm font-semibold sm:text-base`}>넛지</span>
+        <span data-keyword-node data-keyword-id="traffic" className={`${keywordNodeClass} left-[4%] top-[45%] text-sm font-semibold sm:text-base`}>트래픽</span>
+        <span data-keyword-node data-keyword-id="organic" className={`${keywordNodeClass} left-[61%] top-[85%] text-sm font-semibold sm:text-base`}>오가닉</span>
+        <span data-keyword-node data-keyword-id="revenue" className={`${keywordNodeClass} left-[45%] top-[53%] text-sm font-semibold sm:text-base`}>매출</span>
       </h2>
 
-      <p id="keyword-graphic-description" className="absolute bottom-5 left-1/2 w-full -translate-x-1/2 px-6 text-center text-xs font-medium tracking-[0.2em] text-slate-400 sm:text-sm">
+      <p id="keyword-graphic-description" className="absolute -bottom-8 left-1/2 w-full -translate-x-1/2 px-6 text-center text-xs font-medium tracking-[0.2em] text-slate-400 sm:text-sm">
         소비자의 행동을 분석하고 고객의 선택을 이끌어냅니다
       </p>
     </div>
@@ -294,7 +373,7 @@ export default function Home() {
       <main id="top">
         <section className="py-24 sm:py-28 md:py-32 px-6 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto text-center">
-            <div className="relative mb-8">
+            <div className="relative mb-20">
               <InteractiveKeywordHero />
               <a
                 href="/?page=contact"
@@ -412,7 +491,6 @@ export default function Home() {
     </div>
   );
 }
-
 
 
 
