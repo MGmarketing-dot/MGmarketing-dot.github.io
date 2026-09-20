@@ -1,3 +1,5 @@
+import type { PointerEvent } from "react";
+
 const Check = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true">
     <path d="M20 6L9 17l-5-5" />
@@ -64,6 +66,96 @@ const services = [
   },
 ];
 
+const keywordNodeClass =
+  "absolute cursor-default select-none whitespace-nowrap rounded-full border border-white/70 bg-white/75 px-3 py-1.5 shadow-sm backdrop-blur-sm transition-[transform,color,background-color,box-shadow] duration-200 ease-out will-change-transform hover:z-30 hover:border-blue-200 hover:bg-white hover:text-blue-600 hover:shadow-lg";
+
+function InteractiveKeywordHero() {
+  const moveKeywords = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch") return;
+
+    const area = event.currentTarget;
+    const areaRect = area.getBoundingClientRect();
+    const pointerX = event.clientX - areaRect.left;
+    const pointerY = event.clientY - areaRect.top;
+
+    area.querySelectorAll<HTMLElement>("[data-keyword-node]").forEach((node) => {
+      const centerX = node.offsetLeft + node.offsetWidth / 2;
+      const centerY = node.offsetTop + node.offsetHeight / 2;
+      const deltaX = centerX - pointerX;
+      const deltaY = centerY - pointerY;
+      const distance = Math.hypot(deltaX, deltaY);
+      const radius = 170;
+
+      if (distance < radius) {
+        const force = (radius - distance) / radius;
+        const safeDistance = Math.max(distance, 1);
+        const translateX = (deltaX / safeDistance) * force * 18;
+        const translateY = (deltaY / safeDistance) * force * 18;
+        const scale = 1 + force * 0.14;
+        node.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+      } else {
+        node.style.transform = "translate3d(0, 0, 0) scale(1)";
+      }
+    });
+  };
+
+  const resetKeywords = (event: PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.querySelectorAll<HTMLElement>("[data-keyword-node]").forEach((node) => {
+      node.style.transform = "translate3d(0, 0, 0) scale(1)";
+    });
+  };
+
+  return (
+    <div
+      className="relative mx-auto h-[430px] w-full max-w-5xl overflow-hidden rounded-[2.5rem] border border-blue-100 bg-white/60 shadow-[0_30px_80px_-50px_rgba(37,99,235,0.45)] sm:h-[520px] md:h-[600px]"
+      onPointerMove={moveKeywords}
+      onPointerLeave={resetKeywords}
+      aria-describedby="keyword-graphic-description"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.13),transparent_48%)]" />
+
+      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <g stroke="rgb(148 163 184)" strokeWidth="0.18" opacity="0.5">
+          <line x1="48" y1="42" x2="17" y2="34" /><line x1="48" y1="42" x2="70" y2="28" />
+          <line x1="48" y1="42" x2="28" y2="61" /><line x1="48" y1="42" x2="77" y2="57" />
+          <line x1="48" y1="42" x2="58" y2="73" /><line x1="28" y1="61" x2="38" y2="79" />
+          <line x1="77" y1="57" x2="58" y2="73" /><line x1="17" y1="34" x2="8" y2="16" />
+          <line x1="70" y1="28" x2="87" y2="16" /><line x1="70" y1="28" x2="88" y2="48" />
+          <line x1="28" y1="61" x2="11" y2="84" /><line x1="58" y1="73" x2="82" y2="82" />
+          <line x1="48" y1="42" x2="51" y2="12" /><line x1="38" y1="79" x2="51" y2="12" />
+        </g>
+        <g fill="rgb(59 130 246)" opacity="0.22">
+          <circle cx="48" cy="42" r="0.7" /><circle cx="17" cy="34" r="0.45" /><circle cx="70" cy="28" r="0.45" />
+          <circle cx="28" cy="61" r="0.45" /><circle cx="77" cy="57" r="0.45" /><circle cx="58" cy="73" r="0.45" />
+        </g>
+      </svg>
+
+      <h1 aria-label="SEO 소비자 행동 고객 의도 분석 선택 전환 마케팅" className="absolute inset-0 m-0 text-slate-900">
+        <span data-keyword-node className={`${keywordNodeClass} left-[39%] top-[34%] z-20 text-5xl font-black tracking-[-0.06em] text-blue-600 sm:text-7xl md:text-8xl`}>SEO</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[5%] top-[27%] text-xl font-black sm:left-[8%] sm:text-3xl md:text-4xl`}>소비자 행동</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[61%] top-[20%] text-lg font-bold sm:text-2xl md:text-3xl`}>고객 의도</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[16%] top-[55%] text-lg font-bold sm:left-[20%] sm:text-2xl md:text-3xl`}>분석</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[70%] top-[51%] text-xl font-black sm:text-3xl md:text-4xl`}>선택</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[51%] top-[68%] text-lg font-bold sm:text-2xl md:text-3xl`}>전환</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[27%] top-[73%] text-lg font-bold sm:text-2xl md:text-3xl`}>마케팅</span>
+      </h1>
+
+      <h2 aria-label="뷰티 병원 음식점 B2B 퍼널 넛지" className="absolute inset-0 m-0 text-slate-500">
+        <span data-keyword-node className={`${keywordNodeClass} left-[3%] top-[10%] text-sm font-semibold sm:text-base`}>뷰티</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[80%] top-[10%] text-sm font-semibold sm:text-base`}>병원</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[76%] top-[78%] text-sm font-semibold sm:text-base`}>음식점</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[5%] top-[80%] text-sm font-semibold sm:text-base`}>B2B</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[46%] top-[7%] text-sm font-semibold sm:text-base`}>퍼널</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[83%] top-[43%] text-sm font-semibold sm:text-base`}>넛지</span>
+      </h2>
+
+      <p id="keyword-graphic-description" className="absolute bottom-5 left-1/2 w-full -translate-x-1/2 px-6 text-center text-xs font-medium tracking-[0.2em] text-slate-400 sm:text-sm">
+        소비자의 행동을 분석하고 고객의 선택을 이끌어냅니다
+      </p>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
@@ -92,7 +184,8 @@ export default function Home() {
               </div>
             </div>
             <a href="/blog" className="hover:text-slate-900 transition-colors">Blog</a>
-            <a href="/qna" className="hover:text-slate-900 transition-colors">QnA</a>
+            <a href="/qna" className="hover:text-slate-900 transition-colors">QNA</a>
+            <a href="/en" className="hover:text-slate-900 transition-colors" aria-label="영문 페이지로 이동">KOR</a>
           </div>
         </div>
       </nav>
@@ -104,26 +197,20 @@ export default function Home() {
               <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-50" /><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" /></span>
               SEO 기반 
             </div>
-            <div className="relative">
-            <h1 className="text-5xl sm:text-6xl md:text-8xl font-black text-slate-900 leading-[1.08] mb-6" style={{ letterSpacing: "-0.055em" }}>
-              소비자의 행동을 분석하고
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">고객의 선택을</span>
-              <br />
-              이끌어냅니다
-            </h1>
+            <div className="relative mb-8">
+              <InteractiveKeywordHero />
               <a
                 href="/contact"
-                className="mx-auto mt-8 flex h-20 w-20 items-center justify-center rounded-full bg-red-500 text-sm font-black text-white shadow-lg shadow-red-200 transition-all hover:-translate-y-1 hover:bg-red-600 md:absolute md:right-0 md:top-0 md:mt-0 md:h-24 md:w-24 md:text-base"
+                className="fixed bottom-6 right-6 z-40 flex h-20 w-20 items-center justify-center rounded-full bg-red-500 text-sm font-black text-white shadow-lg shadow-red-200 transition-all hover:scale-105 hover:bg-red-600 md:bottom-auto md:top-1/2 md:h-24 md:w-24 md:-translate-y-1/2 md:text-base"
                 aria-label="문의 페이지로 이동"
               >
                 문의
               </a>
             </div>
-            <h2 className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
               네이버·구글 상위노출 | SEO 검색 엔진 최적화 |소비자의 검색 의도를 분석합니다.
               검색 노출부터 클릭, 문의 전환까지 | 최소 비용으로 광고 효율 극대화|
-            </h2>
+            </p>
             <a href="/contact" className="inline-block px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition-colors shadow-lg shadow-blue-200">내 브랜드 흐름 진단하기 →</a>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-8 mt-12 text-sm text-slate-500">
               {["검색 의도에서 시작", "콘텐츠와 전환 동선 연결", "확인 가능한 근거로 개선"].map((text) => <span key={text} className="flex items-center gap-1.5"><span className="text-emerald-500"><Check /></span>{text}</span>)}
@@ -227,5 +314,6 @@ export default function Home() {
     </div>
   );
 }
+
 
 
