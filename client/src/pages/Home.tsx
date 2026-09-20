@@ -1,4 +1,5 @@
-import type { PointerEvent } from "react";
+import { useState } from "react";
+import type { FormEvent, PointerEvent } from "react";
 
 const Check = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true">
@@ -107,27 +108,11 @@ function InteractiveKeywordHero() {
 
   return (
     <div
-      className="relative mx-auto h-[430px] w-full max-w-5xl overflow-hidden bg-transparent sm:h-[520px] md:h-[600px]"
+      className="relative mx-auto h-[420px] w-full max-w-5xl overflow-hidden bg-transparent sm:h-[480px] md:h-[520px]"
       onPointerMove={moveKeywords}
       onPointerLeave={resetKeywords}
       aria-describedby="keyword-graphic-description"
     >
-      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <g stroke="rgb(148 163 184)" strokeWidth="0.18" opacity="0.5">
-          <line x1="48" y1="42" x2="17" y2="34" /><line x1="48" y1="42" x2="70" y2="28" />
-          <line x1="48" y1="42" x2="28" y2="61" /><line x1="48" y1="42" x2="77" y2="57" />
-          <line x1="48" y1="42" x2="58" y2="73" /><line x1="28" y1="61" x2="38" y2="79" />
-          <line x1="77" y1="57" x2="58" y2="73" /><line x1="17" y1="34" x2="8" y2="16" />
-          <line x1="70" y1="28" x2="87" y2="16" /><line x1="70" y1="28" x2="88" y2="48" />
-          <line x1="28" y1="61" x2="11" y2="84" /><line x1="58" y1="73" x2="82" y2="82" />
-          <line x1="48" y1="42" x2="51" y2="12" /><line x1="38" y1="79" x2="51" y2="12" />
-        </g>
-        <g fill="rgb(100 116 139)" opacity="0.22">
-          <circle cx="48" cy="42" r="0.7" /><circle cx="17" cy="34" r="0.45" /><circle cx="70" cy="28" r="0.45" />
-          <circle cx="28" cy="61" r="0.45" /><circle cx="77" cy="57" r="0.45" /><circle cx="58" cy="73" r="0.45" />
-        </g>
-      </svg>
-
       <h1 aria-label="맥거핀마케팅 소비자 행동 고객 의도 분석 선택 전환 마케팅" className="absolute inset-0 m-0 text-slate-900">
         <span data-keyword-node className={`${keywordNodeClass} left-[39%] top-[34%] z-20 text-xl font-black sm:text-3xl md:text-4xl`}>맥거핀마케팅</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[5%] top-[27%] text-xl font-black sm:left-[8%] sm:text-3xl md:text-4xl`}>소비자 행동</span>
@@ -138,13 +123,16 @@ function InteractiveKeywordHero() {
         <span data-keyword-node className={`${keywordNodeClass} left-[27%] top-[73%] text-lg font-bold sm:text-2xl md:text-3xl`}>마케팅</span>
       </h1>
 
-      <h2 aria-label="뷰티 병원 음식점 B2B 퍼널 넛지" className="absolute inset-0 m-0 text-slate-500">
+      <h2 aria-label="뷰티 병원 음식점 B2B 퍼널 넛지 트래픽 오가닉 매출" className="absolute inset-0 m-0 text-slate-500">
         <span data-keyword-node className={`${keywordNodeClass} left-[3%] top-[10%] text-sm font-semibold sm:text-base`}>뷰티</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[80%] top-[10%] text-sm font-semibold sm:text-base`}>병원</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[76%] top-[78%] text-sm font-semibold sm:text-base`}>음식점</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[5%] top-[80%] text-sm font-semibold sm:text-base`}>B2B</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[46%] top-[7%] text-sm font-semibold sm:text-base`}>퍼널</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[83%] top-[43%] text-sm font-semibold sm:text-base`}>넛지</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[4%] top-[45%] text-sm font-semibold sm:text-base`}>트래픽</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[61%] top-[85%] text-sm font-semibold sm:text-base`}>오가닉</span>
+        <span data-keyword-node className={`${keywordNodeClass} left-[45%] top-[53%] text-sm font-semibold sm:text-base`}>매출</span>
       </h2>
 
       <p id="keyword-graphic-description" className="absolute bottom-5 left-1/2 w-full -translate-x-1/2 px-6 text-center text-xs font-medium tracking-[0.2em] text-slate-400 sm:text-sm">
@@ -154,8 +142,115 @@ function InteractiveKeywordHero() {
   );
 }
 
+function ContactPage() {
+  const [status, setStatus] = useState("");
+
+  const submitInquiry = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const company = String(data.get("company") ?? "");
+    const email = String(data.get("email") ?? "");
+    const phone = String(data.get("phone") ?? "");
+    const website = String(data.get("website") ?? "");
+    const message = String(data.get("message") ?? "");
+    const summary = [
+      `[상호명] ${company}`,
+      `[이메일] ${email}`,
+      `[연락처] ${phone}`,
+      `[웹페이지 주소] ${website || "없음"}`,
+      "",
+      "[문의 내용]",
+      message,
+    ].join("\n");
+    const recipient = import.meta.env.VITE_CONTACT_EMAIL?.trim();
+
+    if (recipient) {
+      const subject = encodeURIComponent(`[맥거핀 마케팅 문의] ${company}`);
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${encodeURIComponent(summary)}`;
+      setStatus("이메일 작성창을 열었습니다. 내용을 확인한 뒤 전송해주세요.");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      setStatus("문의 내용이 복사되었습니다. 카카오톡 창에 붙여넣어 보내주세요.");
+    } catch {
+      setStatus("카카오톡 창에서 작성한 내용을 보내주세요.");
+    }
+    window.open("https://open.kakao.com/o/sHRnFKNi", "_blank", "noopener,noreferrer");
+  };
+
+  const inputClass =
+    "mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100";
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900">
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+          <a href="/" className="flex items-center gap-2" aria-label="맥거핀 마케팅 홈">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-sm font-black text-white">M</span>
+            <span className="font-black">맥거핀 마케팅</span>
+          </a>
+          <a href="/" className="text-sm font-semibold text-slate-500 transition-colors hover:text-slate-900">홈으로 돌아가기</a>
+        </div>
+      </header>
+
+      <main className="px-6 py-16 sm:py-24">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10 text-center">
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.24em] text-blue-600">Project inquiry</p>
+            <h1 className="mb-4 text-4xl font-black tracking-tight sm:text-5xl">프로젝트 문의</h1>
+            <p className="mx-auto max-w-xl leading-relaxed text-slate-500">현재 고민하고 있는 문제와 목표를 알려주세요. 내용을 확인한 뒤 연락드리겠습니다.</p>
+          </div>
+
+          <form onSubmit={submitInquiry} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-10">
+            <div className="grid gap-6 sm:grid-cols-2">
+              <label className="text-sm font-bold text-slate-700">
+                상호명 <span className="text-red-500">*</span>
+                <input name="company" required className={inputClass} placeholder="회사 또는 브랜드명을 입력해주세요" />
+              </label>
+              <label className="text-sm font-bold text-slate-700">
+                Email <span className="text-red-500">*</span>
+                <input name="email" type="email" required className={inputClass} placeholder="reply@example.com" />
+              </label>
+              <label className="text-sm font-bold text-slate-700">
+                연락처 <span className="text-red-500">*</span>
+                <input name="phone" type="tel" required className={inputClass} placeholder="010-0000-0000" />
+              </label>
+              <label className="text-sm font-bold text-slate-700">
+                웹페이지 주소
+                <input name="website" type="url" className={inputClass} placeholder="https://example.com" />
+              </label>
+            </div>
+
+            <label className="mt-6 block text-sm font-bold text-slate-700">
+              문의 내용 <span className="text-red-500">*</span>
+              <textarea
+                name="message"
+                required
+                rows={8}
+                className={`${inputClass} resize-y`}
+                placeholder="목표 키워드 및 요청사항을 입력해주세요. 현재 운영 중인 채널, 해결하고 싶은 문제, 원하는 목표를 함께 적어주시면 더 정확하게 확인할 수 있습니다."
+              />
+            </label>
+
+            <div className="mt-7 flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-center">
+              <p className="text-xs leading-relaxed text-slate-400">입력한 정보는 문의 확인과 회신 목적으로만 사용됩니다.</p>
+              <button type="submit" className="shrink-0 rounded-xl bg-blue-600 px-7 py-3.5 font-bold text-white transition-colors hover:bg-blue-700">문의 보내기 →</button>
+            </div>
+            {status && <p role="status" className="mt-5 rounded-xl bg-blue-50 px-4 py-3 text-sm font-medium text-blue-700">{status}</p>}
+          </form>
+        </div>
+      </main>
+    </div>
+  );
+}
+
 export default function Home() {
   const isEnglishPage = typeof window !== "undefined" && /^\/en(?:\/|$)/.test(window.location.pathname);
+  const isContactPage = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("page") === "contact";
+
+  if (isContactPage) return <ContactPage />;
 
   return (
     <div className="min-h-screen bg-white">
@@ -202,7 +297,7 @@ export default function Home() {
             <div className="relative mb-8">
               <InteractiveKeywordHero />
               <a
-                href="/contact"
+                href="/?page=contact"
                 className="fixed bottom-6 right-6 z-40 flex h-20 w-20 items-center justify-center rounded-full bg-red-500 text-sm font-black text-white shadow-lg shadow-red-200 transition-all hover:scale-105 hover:bg-red-600 md:bottom-auto md:top-1/2 md:h-24 md:w-24 md:-translate-y-1/2 md:text-base"
                 aria-label="문의 페이지로 이동"
               >
@@ -210,10 +305,11 @@ export default function Home() {
               </a>
             </div>
             <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-              네이버·구글 상위노출 | SEO 검색 엔진 최적화 |소비자의 검색 의도를 분석합니다.
-              검색 노출부터 클릭, 문의 전환까지 | 최소 비용으로 광고 효율 극대화|
+              네이버·구글 상위노출 | SEO 검색 엔진 최적화 | 소비자의 검색 의도를 분석합니다. 검색 노출
+              <br />
+              부터 클릭, 문의 전환까지 | 최소 비용으로 광고 효율 극대화
             </p>
-            <a href="/contact" className="inline-block px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition-colors shadow-lg shadow-blue-200">내 브랜드 흐름 진단하기 →</a>
+            <a href="/?page=contact" className="inline-block px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition-colors shadow-lg shadow-blue-200">내 브랜드 흐름 진단하기 →</a>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-8 mt-12 text-sm text-slate-500">
               {["검색 의도에서 시작", "콘텐츠와 전환 동선 연결", "확인 가능한 근거로 개선"].map((text) => <span key={text} className="flex items-center gap-1.5"><span className="text-emerald-500"><Check /></span>{text}</span>)}
             </div>
@@ -273,7 +369,7 @@ export default function Home() {
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">팔리는 제품은 우연이 아닌 설계입니다.</h2>
             <p className="text-blue-100 text-lg sm:text-xl mb-8"><br /></p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a href="/contact" className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">문의하기 →</a>
+              <a href="/?page=contact" className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">문의하기 →</a>
               <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">사이트 무료 진단</a>
             </div>
           </div>
