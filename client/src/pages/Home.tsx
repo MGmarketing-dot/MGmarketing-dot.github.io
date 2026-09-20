@@ -67,7 +67,7 @@ const services = [
 ];
 
 const keywordNodeClass =
-  "absolute cursor-default select-none whitespace-nowrap rounded-full border border-white/70 bg-white/75 px-3 py-1.5 shadow-sm backdrop-blur-sm transition-[transform,color,background-color,box-shadow] duration-200 ease-out will-change-transform hover:z-30 hover:border-blue-200 hover:bg-white hover:text-blue-600 hover:shadow-lg";
+  "absolute cursor-default select-none whitespace-nowrap px-2 py-1 text-slate-500 transition-[transform,color] duration-200 ease-out will-change-transform hover:z-30 hover:text-slate-800";
 
 function InteractiveKeywordHero() {
   const moveKeywords = (event: PointerEvent<HTMLDivElement>) => {
@@ -107,13 +107,11 @@ function InteractiveKeywordHero() {
 
   return (
     <div
-      className="relative mx-auto h-[430px] w-full max-w-5xl overflow-hidden rounded-[2.5rem] border border-blue-100 bg-white/60 shadow-[0_30px_80px_-50px_rgba(37,99,235,0.45)] sm:h-[520px] md:h-[600px]"
+      className="relative mx-auto h-[430px] w-full max-w-5xl overflow-hidden bg-transparent sm:h-[520px] md:h-[600px]"
       onPointerMove={moveKeywords}
       onPointerLeave={resetKeywords}
       aria-describedby="keyword-graphic-description"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.13),transparent_48%)]" />
-
       <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <g stroke="rgb(148 163 184)" strokeWidth="0.18" opacity="0.5">
           <line x1="48" y1="42" x2="17" y2="34" /><line x1="48" y1="42" x2="70" y2="28" />
@@ -124,14 +122,14 @@ function InteractiveKeywordHero() {
           <line x1="28" y1="61" x2="11" y2="84" /><line x1="58" y1="73" x2="82" y2="82" />
           <line x1="48" y1="42" x2="51" y2="12" /><line x1="38" y1="79" x2="51" y2="12" />
         </g>
-        <g fill="rgb(59 130 246)" opacity="0.22">
+        <g fill="rgb(100 116 139)" opacity="0.22">
           <circle cx="48" cy="42" r="0.7" /><circle cx="17" cy="34" r="0.45" /><circle cx="70" cy="28" r="0.45" />
           <circle cx="28" cy="61" r="0.45" /><circle cx="77" cy="57" r="0.45" /><circle cx="58" cy="73" r="0.45" />
         </g>
       </svg>
 
-      <h1 aria-label="SEO 소비자 행동 고객 의도 분석 선택 전환 마케팅" className="absolute inset-0 m-0 text-slate-900">
-        <span data-keyword-node className={`${keywordNodeClass} left-[39%] top-[34%] z-20 text-5xl font-black tracking-[-0.06em] text-blue-600 sm:text-7xl md:text-8xl`}>SEO</span>
+      <h1 aria-label="맥거핀마케팅 소비자 행동 고객 의도 분석 선택 전환 마케팅" className="absolute inset-0 m-0 text-slate-900">
+        <span data-keyword-node className={`${keywordNodeClass} left-[39%] top-[34%] z-20 text-xl font-black sm:text-3xl md:text-4xl`}>맥거핀마케팅</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[5%] top-[27%] text-xl font-black sm:left-[8%] sm:text-3xl md:text-4xl`}>소비자 행동</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[61%] top-[20%] text-lg font-bold sm:text-2xl md:text-3xl`}>고객 의도</span>
         <span data-keyword-node className={`${keywordNodeClass} left-[16%] top-[55%] text-lg font-bold sm:left-[20%] sm:text-2xl md:text-3xl`}>분석</span>
@@ -157,6 +155,8 @@ function InteractiveKeywordHero() {
 }
 
 export default function Home() {
+  const isEnglishPage = typeof window !== "undefined" && /^\/en(?:\/|$)/.test(window.location.pathname);
+
   return (
     <div className="min-h-screen bg-white">
       <nav className="border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur z-50">
@@ -183,9 +183,15 @@ export default function Home() {
                 <a href="/service/naver-seo" className="block rounded-lg px-4 py-3 text-left text-sm text-slate-700 hover:bg-green-50 hover:text-green-600">네이버 SEO</a>
               </div>
             </div>
-            <a href="/blog" className="hover:text-slate-900 transition-colors">Blog</a>
+            <a href="https://blog.naver.com/sorekara_" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">Blog</a>
             <a href="/qna" className="hover:text-slate-900 transition-colors">QNA</a>
-            <a href="/en" className="hover:text-slate-900 transition-colors" aria-label="영문 페이지로 이동">KOR</a>
+            <a
+              href={isEnglishPage ? "/" : "/en"}
+              className="hover:text-slate-900 transition-colors"
+              aria-label={isEnglishPage ? "한국어 페이지로 이동" : "영문 페이지로 이동"}
+            >
+              {isEnglishPage ? "KOR" : "ENG"}
+            </a>
           </div>
         </div>
       </nav>
@@ -193,10 +199,6 @@ export default function Home() {
       <main id="top">
         <section className="py-24 sm:py-28 md:py-32 px-6 bg-gradient-to-b from-blue-50 to-white">
           <div className="max-w-7xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-8 uppercase tracking-widest">
-              <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-50" /><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" /></span>
-              SEO 기반 
-            </div>
             <div className="relative mb-8">
               <InteractiveKeywordHero />
               <a
@@ -314,6 +316,7 @@ export default function Home() {
     </div>
   );
 }
+
 
 
 
