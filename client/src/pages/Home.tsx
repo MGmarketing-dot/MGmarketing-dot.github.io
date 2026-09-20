@@ -1,6 +1,3 @@
-import { useEffect, useMemo, useState } from "react";
-import type { FormEvent } from "react";
-
 const Check = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true">
     <path d="M20 6L9 17l-5-5" />
@@ -67,92 +64,7 @@ const services = [
   },
 ];
 
-function InquiryModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [fields, setFields] = useState({ brand: "", contact: "", message: "" });
-
-  useEffect(() => {
-    if (!open) return undefined;
-    const closeOnEscape = (event: KeyboardEvent) => event.key === "Escape" && onClose();
-    window.addEventListener("keydown", closeOnEscape);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", closeOnEscape);
-      document.body.style.overflow = "";
-    };
-  }, [open, onClose]);
-
-  const summary = useMemo(
-    () => `[브랜드명] ${fields.brand}\n[연락받을 곳] ${fields.contact}\n[해결하고 싶은 문제]\n${fields.message}`,
-    [fields],
-  );
-
-  if (!open) return null;
-
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSubmitted(true);
-  };
-
-  const close = () => {
-    setSubmitted(false);
-    setCopied(false);
-    onClose();
-  };
-
-  const copy = async () => {
-    await navigator.clipboard.writeText(summary);
-    setCopied(true);
-  };
-
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/55 backdrop-blur-sm px-4" role="dialog" aria-modal="true" aria-labelledby="inquiry-title" onMouseDown={(e) => e.target === e.currentTarget && close()}>
-      <div className="w-full max-w-xl rounded-2xl bg-white p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex items-start justify-between gap-4 mb-6">
-          <div>
-            <p className="text-blue-600 text-xs font-bold uppercase tracking-widest mb-2">Project inquiry</p>
-            <h2 id="inquiry-title" className="text-2xl sm:text-3xl font-black text-slate-900">지금 막힌 지점부터 알려주세요.</h2>
-          </div>
-          <button type="button" onClick={close} className="w-9 h-9 shrink-0 rounded-full border border-slate-200 text-slate-500 hover:bg-slate-50" aria-label="문의 창 닫기">✕</button>
-        </div>
-        {!submitted ? (
-          <form onSubmit={submit} className="space-y-4">
-            <label className="block text-sm font-semibold text-slate-700">이름 또는 브랜드명
-              <input required value={fields.brand} onChange={(e) => setFields({ ...fields, brand: e.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 font-normal focus:border-blue-500 focus:outline-none" placeholder="예: 맥거핀 마케팅" />
-            </label>
-            <label className="block text-sm font-semibold text-slate-700">연락받을 곳
-              <input required value={fields.contact} onChange={(e) => setFields({ ...fields, contact: e.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 font-normal focus:border-blue-500 focus:outline-none" placeholder="이메일 또는 전화번호" />
-            </label>
-            <label className="block text-sm font-semibold text-slate-700">가장 해결하고 싶은 문제
-              <textarea required rows={5} value={fields.message} onChange={(e) => setFields({ ...fields, message: e.target.value })} className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-3 font-normal focus:border-blue-500 focus:outline-none resize-y" placeholder="예: 검색 유입은 있지만 상담 문의로 잘 이어지지 않습니다." />
-            </label>
-            <p className="text-xs leading-relaxed text-slate-400">비공개 미리보기에서는 입력한 내용이 외부로 전송되지 않습니다.</p>
-            <button type="submit" className="w-full rounded-xl bg-blue-600 px-6 py-3.5 text-white font-bold hover:bg-blue-700 transition-colors">문의 내용 보내기 →</button>
-          </form>
-        ) : (
-          <div>
-            <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold mb-4">✓</div>
-            <h3 className="text-xl font-black text-slate-900 mb-2">문의 초안이 완성되었습니다.</h3>
-            <p className="text-sm text-slate-500 leading-relaxed mb-5">현재는 외부 전송 없이 브라우저 안에서만 정리됩니다. 공개 전 실제 수신 채널을 연결할 수 있습니다.</p>
-            <pre className="rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-700 whitespace-pre-wrap font-sans mb-4">{summary}</pre>
-           <button
-  type="button"
-  onClick={() => window.open("https://open.kakao.com/o/sHRnFKNi", "_blank")}
-  className="w-full rounded-xl bg-yellow-400 px-6 py-3.5 text-slate-900 font-bold hover:bg-yellow-500 transition-colors"
->
-  카카오톡으로 문의 보내기 →
-</button>
-  
-            </div>)}
-      </div>
-        </div>
-  );
-}
-
 export default function Home() {
-  const [inquiryOpen, setInquiryOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white">
       <nav className="border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur z-50">
@@ -161,22 +73,38 @@ export default function Home() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-black text-sm">M</div>
             <span className="font-black text-slate-900 text-lg">맥거핀 마케팅</span>
           </a>
-          <div className="hidden md:flex items-center gap-8 text-sm text-slate-600">
-            <a href="#services" className="hover:text-slate-900 transition-colors">서비스</a>
-            <a href="#process" className="hover:text-slate-900 transition-colors">진행 방식</a>
-            <a href="#principles" className="hover:text-slate-900 transition-colors">마케팅 원칙</a>
+          <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-600">
+            <a href="#top" className="hover:text-slate-900 transition-colors">About</a>
+            <div className="group relative">
+              <button
+                type="button"
+                className="flex items-center gap-1 py-5 hover:text-slate-900 transition-colors"
+                aria-haspopup="true"
+              >
+                Service
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+              <div className="invisible absolute left-1/2 top-full z-50 w-36 -translate-x-1/2 translate-y-2 rounded-xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                <a href="/service/google-seo" className="block rounded-lg px-4 py-3 text-left text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600">구글 SEO</a>
+                <a href="/service/naver-seo" className="block rounded-lg px-4 py-3 text-left text-sm text-slate-700 hover:bg-green-50 hover:text-green-600">네이버 SEO</a>
+              </div>
+            </div>
+            <a href="/blog" className="hover:text-slate-900 transition-colors">Blog</a>
+            <a href="/qna" className="hover:text-slate-900 transition-colors">QnA</a>
           </div>
-          <button onClick={() => setInquiryOpen(true)} className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors">상담 시작하기</button>
         </div>
       </nav>
 
       <main id="top">
         <section className="py-24 sm:py-28 md:py-32 px-6 bg-gradient-to-b from-blue-50 to-white">
-          <div className="max-w-5xl mx-auto text-center">
+          <div className="max-w-7xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold mb-8 uppercase tracking-widest">
               <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-50" /><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" /></span>
               SEO 기반 
             </div>
+            <div className="relative">
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-black text-slate-900 leading-[1.08] mb-6" style={{ letterSpacing: "-0.055em" }}>
               소비자의 행동을 분석하고
               <br />
@@ -184,11 +112,19 @@ export default function Home() {
               <br />
               이끌어냅니다
             </h1>
+              <a
+                href="/contact"
+                className="mx-auto mt-8 flex h-20 w-20 items-center justify-center rounded-full bg-red-500 text-sm font-black text-white shadow-lg shadow-red-200 transition-all hover:-translate-y-1 hover:bg-red-600 md:absolute md:right-0 md:top-0 md:mt-0 md:h-24 md:w-24 md:text-base"
+                aria-label="문의 페이지로 이동"
+              >
+                문의
+              </a>
+            </div>
             <h2 className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
               네이버·구글 상위노출 | SEO 검색 엔진 최적화 |소비자의 검색 의도를 분석합니다.
               검색 노출부터 클릭, 문의 전환까지 | 최소 비용으로 광고 효율 극대화|
             </h2>
-            <button onClick={() => setInquiryOpen(true)} className="px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition-colors shadow-lg shadow-blue-200">내 브랜드 흐름 진단하기 →</button>
+            <a href="/contact" className="inline-block px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg transition-colors shadow-lg shadow-blue-200">내 브랜드 흐름 진단하기 →</a>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-8 mt-12 text-sm text-slate-500">
               {["검색 의도에서 시작", "콘텐츠와 전환 동선 연결", "확인 가능한 근거로 개선"].map((text) => <span key={text} className="flex items-center gap-1.5"><span className="text-emerald-500"><Check /></span>{text}</span>)}
             </div>
@@ -234,7 +170,7 @@ export default function Home() {
         <section id="principles" className="py-24 px-6 bg-slate-50 scroll-mt-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="text-4xl font-black text-slate-900 mb-4">분석 → 실행 → 매출 전환</div>
-            <h2 className="text-slate-600 text-xl mb-12">맥거핀 마케팅 | 검색 엔진 최적화 전략</p>
+            <h2 className="text-slate-600 text-xl mb-12">맥거핀 마케팅 | 검색 엔진 최적화 전략</h2>
             <div className="p-8 sm:p-10 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-100">
               <div className="flex gap-2 justify-center mb-5 text-blue-500"><span>◆</span><span>◆</span><span>◆</span></div>
               <p className="text-xl sm:text-2xl text-slate-900 font-light leading-relaxed mb-7">“확인할 수 있는 검색 데이터와 소비자 의도를 바탕으로 전환을 설계합니다.”</p>
@@ -248,23 +184,48 @@ export default function Home() {
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">팔리는 제품은 우연이 아닌 설계입니다.</h2>
             <p className="text-blue-100 text-lg sm:text-xl mb-8"><br /></p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button onClick={() => setInquiryOpen(true)} className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">상담 시작하기 →</button>
+              <a href="/contact" className="px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-lg hover:shadow-xl transition-shadow">문의하기 →</a>
               <a href="#services" className="px-8 py-4 rounded-xl border-2 border-white/40 text-white font-bold hover:bg-white/10 transition-colors">사이트 무료 진단</a>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="bg-slate-900 py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <a href="#top" className="flex items-center gap-2"><div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-xs">M</div><span className="font-bold text-white">맥거핀 마케팅</span></a>
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 text-sm text-slate-500"><a href="#services" className="hover:text-white transition-colors">서비스</a><a href="#process" className="hover:text-white transition-colors">진행 방식</a><a href="#principles" className="hover:text-white transition-colors">마케팅 원칙</a><button onClick={() => setInquiryOpen(true)} className="hover:text-white transition-colors">문의</button></div>
-          <p className="text-slate-600 text-sm">© 2026 MacGuffin Marketing</p>
+      <footer className="min-h-[22rem] bg-slate-900 px-6 py-24">
+        <div className="max-w-7xl mx-auto min-h-[10rem] flex flex-col justify-between gap-14">
+          <div className="flex flex-col items-start justify-between gap-12 md:flex-row">
+            <a href="#top" className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-sm font-black text-white">M</div>
+              <span className="text-lg font-bold text-white">맥거핀 마케팅</span>
+            </a>
+
+            <div className="md:text-right">
+              <p className="mb-5 text-xl font-bold text-white sm:text-2xl">팔리는 제품은 우연이 아닌 설계입니다.</p>
+              <div className="flex items-center gap-3 md:justify-end">
+                <a href="#" aria-label="인스타그램" className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-300 transition-colors hover:border-white hover:text-white">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+                </a>
+                <a href="#" aria-label="페이스북" className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-300 transition-colors hover:border-white hover:text-white">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.6 22v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.4V14h2.8v8h3.4Z" /></svg>
+                </a>
+                <a href="#" aria-label="카카오톡" className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-300 transition-colors hover:border-white hover:text-white">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6L5.5 22l5.1-3.4c.5.1.9.1 1.4.1 5.5 0 10-3.5 10-7.9S17.5 3 12 3Z" /></svg>
+                </a>
+                <a href="#" aria-label="텔레그램" className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-300 transition-colors hover:border-white hover:text-white">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m21.5 3.4-3.1 16.2c-.2 1.1-.9 1.4-1.8.9l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9-4.7-1.5c-1-.3-1-1 .2-1.5L20 3.3c.9-.3 1.7.2 1.5 1.1Z" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end border-t border-slate-800 pt-6">
+            <p className="text-sm text-slate-500">© 2026 MacGuffin Marketing. All rights reserved.</p>
+          </div>
         </div>
       </footer>
 
-      <InquiryModal open={inquiryOpen} onClose={() => setInquiryOpen(false)} />
     </div>
   );
+}
 }
 
